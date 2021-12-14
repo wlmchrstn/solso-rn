@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import Axios from 'axios';
 import moment from 'moment';
+
 import { BackButton } from '../../components/Button/button';
 
 const EventDetail = () => {

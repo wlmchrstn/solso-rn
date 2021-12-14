@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Image, Pressable, ScrollView, StyleSheet, Text, ToastAndroid, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, ToastAndroid, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import Axios from 'axios';

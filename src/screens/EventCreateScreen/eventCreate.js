@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { launchImageLibrary } from 'react-native-image-picker';
 import { useSelector } from 'react-redux';
 import Axios from 'axios';
 

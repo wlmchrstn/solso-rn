@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, Text, ToastAndroid, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { launchImageLibrary } from 'react-native-image-picker';
 
 import { BackButton } from '../../components/Button/button';
 
@@ -11,7 +10,6 @@ const Profile = ({}) => {
     const ProfileReducer = useSelector(state => state.ProfileReducer);
     const AuthReducer = useSelector(state => state.AuthReducer);
     const dispatch = useDispatch();
-    const [image, setImage] = useState(null);
 
     useEffect(() => {
         const getProfile = async () => {
@@ -51,54 +49,8 @@ const Profile = ({}) => {
     }
 
     const uploadOnpressed = () => {
-        const options = {
-            mediaType: 'photo',
-        };
-
-        launchImageLibrary(options, (response) => {
-
-            if (response.didCancel) {
-            } else if (response.errorCode) {
-                navigation.navigate('Login');
-            } else {
-                setImage(response.assets[0]);
-                foto();
-                navigation.navigate('Profile');
-            };
-        });
+        ToastAndroid.show('This is future feature!', ToastAndroid.SHORT);
     }
-
-    const foto = async () => {
-        try {
-            let photo = new FormData();
-            photo.append('image', {
-                uri: image.uri,
-                name: image.fileName || 'profile',
-                type: image.type
-            });
-
-            const addimage = async objparam => await Axios.put('https://solso.herokuapp.com/api/member/upload', objparam,
-                {
-                    headers: {
-                        Authorization: AuthReducer.token,
-                    }
-                }
-            );
-
-            addimage(photo)
-                .then(response => {
-                    dispatch({
-                        type: 'SET_IMAGE',
-                        url: response.data.result.profilePic,
-                    });
-                    ToastAndroid.show("Profile picture updated", ToastAndroid.SHORT);
-                })
-                .catch(err => {
-                    ToastAndroid.show("Failed to update profile picture", ToastAndroid.SHORT);
-                });
-        } catch (e) {
-        }
-    };
 
     return (
         <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
