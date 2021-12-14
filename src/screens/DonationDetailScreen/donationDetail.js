@@ -72,15 +72,16 @@ const DonationDetail = () => {
 
     const payOnpressed = async () => {
         try {
-            const pay = async () => await Axios.post(`https://solso.herokuapp.com/api/donation/pay-donation/${DetailReducer.donation}`, {
+            const payTransaction = async (objparam) => await Axios.post(`http://solso.herokuapp.com/api/donation/pay-donation/${DetailReducer.donation}`, objparam, {
                 headers: {
                     Authorization: AuthReducer.token,
                 }
             });
 
-            pay()
+            payTransaction({})
                 .then(res => {
                     if (res.data.success === true) {
+                        ToastAndroid.show('Donation paid', ToastAndroid.SHORT);
                         getTransaction();
                     } else {
                         ToastAndroid.show('Failed to make transaction', ToastAndroid.SHORT);
